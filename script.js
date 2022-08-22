@@ -1,7 +1,13 @@
 const buttons = document.getElementsByClassName('player-button');
 const selectedFivePlayerList = document.getElementById('selected-five-list');
 const perPlayerCostBox = document.getElementById('per-player-cost');
-const playerTotalCost = document.getElementById('player-total-cost');
+const playerTotalCostButton = document.getElementById('player-total-cost-button');
+const totalPlayerExpensesField = document.getElementById('total-player-expense');
+const managerCostBox = document.getElementById('manager-cost');
+const coachCostBox = document.getElementById('coach-cost');
+const calculateTotalButton = document.getElementById('calculate-total');
+const totalExpensesField = document.getElementById('total-expense');
+const alertMessage = 'Please provide a valid input.'
 let selectedPlayerCounter = 0;
 
 function createCustomElement(playerName) {
@@ -11,19 +17,51 @@ function createCustomElement(playerName) {
     selectedFivePlayerList.appendChild(element);
 }
 
-function calculatePlayerTotalCost(totalPlayer, perPlayerCost) {
-    if(typeof totalPlayer === 'number' && typeof perPlayerCost === 'number') {
-        if(isNaN(totalPlayer) === false && isNaN(perPlayerCost) === false) {
-            return totalPlayer * perPlayerCost;
-        }
-        else {
-            alert('Invalid input. Please provide vaild number.');    
-        }
+function calculatePlayerTotalCost() {
+    // gets per player cost value from input box
+    const perPlayerCostString = perPlayerCostBox.value;
+    
+    // converts per player value to number
+    const perPlayerCostNumber = parseFloat(perPlayerCostString);
+
+    return selectedPlayerCounter * perPlayerCostNumber;    
+};
+
+function calculateTotalCost(playerCost, managerCost, coachCost) {
+    return playerCost + managerCost + coachCost;
+}
+
+function updateTotalPlayerExpensesField() {
+    const totalPlayerExpenses =  calculatePlayerTotalCost();
+    
+    if(typeof totalPlayerExpenses === 'number' && isNaN(totalPlayerExpenses) === false) {
+        totalPlayerExpensesField.innerText = totalPlayerExpenses;
     }
     else {
-        console.log('he');
-        alert('Invalid input. Please provide vaild number.');
+        alert(alertMessage);
     }
+}
+
+function updateTotalExpensesFiels() {
+    
+    const totalPlayerExpenses = calculatePlayerTotalCost();
+
+    const managerCostString = managerCostBox.value;
+    const managerCostNumber = parseFloat(managerCostString);
+
+    const coachCostString = coachCostBox.value;
+    const coachCostNumber = parseFloat(coachCostString);
+
+    
+    const totalExpenses = calculateTotalCost(totalPlayerExpenses, managerCostNumber, coachCostNumber);
+    
+    if(typeof totalExpenses === 'number' && isNaN(totalExpenses) === false) {
+        totalExpensesField.innerText = totalExpenses;
+    }
+    else {
+        alert(alertMessage);
+    }
+
 }
 
 // adds eventlistener to every player button
@@ -56,8 +94,11 @@ for(button of buttons) {
     })
 };
 
-playerTotalCost.addEventListener('click', function() {
-    const perPlayerCostString = perPlayerCostBox.value;
-    const perPlayerCostNumber = parseFloat(perPlayerCostString);
-    console.log(calculatePlayerTotalCost(selectedPlayerCounter, perPlayerCostNumber));
+playerTotalCostButton.addEventListener('click', function() {
+    updateTotalPlayerExpensesField();
+});
+
+calculateTotalButton.addEventListener('click', function() {
+    updateTotalPlayerExpensesField();
+    updateTotalExpensesFiels();
 });
