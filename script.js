@@ -104,5 +104,7 @@ playerTotalCostButton.addEventListener('click', function() {
 
 calculateTotalButton.addEventListener('click', function() {
     updateTotalPlayerExpensesField();
-    updateTotalExpensesFiels();
+    if(selectedPlayerCounter !== 0) {
+        updateTotalExpensesFiels();
+    }
 });
