@@ -17,6 +17,11 @@ function createCustomElement(playerName) {
     selectedFivePlayerList.appendChild(element);
 }
 
+function disableSelectButton() {
+    selectedPlayer.setAttribute('disabled', 'true');
+    selectedPlayer.innerText = 'Selected';
+}
+
 function calculatePlayerTotalCost() {
     // gets per player cost value from input box
     const perPlayerCostString = perPlayerCostBox.value;
@@ -87,8 +92,7 @@ for(button of buttons) {
             createCustomElement(selectedPlayerName);
 
             // disable the button after clicking on it
-            selectedPlayer.setAttribute('disabled', 'true');
-            selectedPlayer.innerText = 'Selected';
+            disableSelectButton();
         }
         else {
             
