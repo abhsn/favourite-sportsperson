@@ -1,5 +1,7 @@
 const buttons = document.getElementsByClassName('player-button');
 const selectedFivePlayerList = document.getElementById('selected-five-list');
+const perPlayerCostBox = document.getElementById('per-player-cost');
+const playerTotalCost = document.getElementById('player-total-cost');
 let selectedPlayerCounter = 0;
 
 function createCustomElement(playerName) {
@@ -9,7 +11,22 @@ function createCustomElement(playerName) {
     selectedFivePlayerList.appendChild(element);
 }
 
-// adds eventlistener to every button
+function calculatePlayerTotalCost(totalPlayer, perPlayerCost) {
+    if(typeof totalPlayer === 'number' && typeof perPlayerCost === 'number') {
+        if(isNaN(totalPlayer) === false && isNaN(perPlayerCost) === false) {
+            return totalPlayer * perPlayerCost;
+        }
+        else {
+            alert('Invalid input. Please provide vaild number.');    
+        }
+    }
+    else {
+        console.log('he');
+        alert('Invalid input. Please provide vaild number.');
+    }
+}
+
+// adds eventlistener to every player button
 for(button of buttons) {
     button.addEventListener('click', function(event) {
         
@@ -38,3 +55,9 @@ for(button of buttons) {
         }
     })
 };
+
+playerTotalCost.addEventListener('click', function() {
+    const perPlayerCostString = perPlayerCostBox.value;
+    const perPlayerCostNumber = parseFloat(perPlayerCostString);
+    console.log(calculatePlayerTotalCost(selectedPlayerCounter, perPlayerCostNumber));
+});
