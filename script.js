@@ -34,6 +34,10 @@ function calculateTotalCost(playerCost, managerCost, coachCost) {
 function updateTotalPlayerExpensesField() {
     const totalPlayerExpenses =  calculatePlayerTotalCost();
     
+    if(selectedPlayerCounter === 0) {
+        alert('You didn\'t select any player.');
+    }
+
     if(typeof totalPlayerExpenses === 'number' && isNaN(totalPlayerExpenses) === false) {
         totalPlayerExpensesField.innerText = totalPlayerExpenses;
     }
