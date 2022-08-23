@@ -45,7 +45,7 @@ function updateTotalPlayerExpensesField() {
     const totalPlayerExpenses =  calculatePlayerTotalCost();
     
     if(selectedPlayerCounter === 0) {
-        alert('You didn\'t select any player.');
+        alert('You didn\'t select any player. Please select any.');
     }
 
     if(typeof totalPlayerExpenses === 'number' && isNaN(totalPlayerExpenses) === false) {
