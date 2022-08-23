@@ -58,18 +58,24 @@ function updateTotalPlayerExpensesField() {
 
 // changes inner text of total cost
 function updateTotalExpensesField() {
-    
-    const totalPlayerExpenses = calculatePlayerTotalCost();
 
+    // gets player costs from player expenses field
+    const totalPlayerExpensesString = totalPlayerExpensesField.innerText;
+    const totalPlayerExpensesNumber = parseFloat(totalPlayerExpensesString);
+    const totalPlayerExpenses = totalPlayerExpensesNumber;
+
+    // gets manager costs from manager cost field
     const managerCostString = managerCostBox.value;
     const managerCostNumber = parseFloat(managerCostString);
 
+    // gets coach costs from coach cost field
     const coachCostString = coachCostBox.value;
     const coachCostNumber = parseFloat(coachCostString);
 
-    
+    // calcute total expenses
     const totalExpenses = calculateTotalCost(totalPlayerExpenses, managerCostNumber, coachCostNumber);
     
+    // shows total expenses if the output value is number type
     if(typeof totalExpenses === 'number' && isNaN(totalExpenses) === false) {
         totalExpensesField.innerText = totalExpenses;
     }
