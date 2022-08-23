@@ -10,18 +10,21 @@ const totalExpensesField = document.getElementById('total-expense');
 const alertMessage = 'Please provide a valid input.'
 let selectedPlayerCounter = 0;
 
+// creates custom li and adds to ol
 function createCustomElement(playerName) {
     const element = document.createElement('li');
     element.classList.add('p-4');
     element.innerText = playerName;
     selectedFivePlayerList.appendChild(element);
-}
+};
 
+// disables select button after clicking on it
 function disableSelectButton() {
     selectedPlayer.setAttribute('disabled', 'true');
     selectedPlayer.innerText = 'Selected';
-}
+};
 
+// calculates selected player cost
 function calculatePlayerTotalCost() {
     // gets per player cost value from input box
     const perPlayerCostString = perPlayerCostBox.value;
@@ -32,10 +35,12 @@ function calculatePlayerTotalCost() {
     return selectedPlayerCounter * perPlayerCostNumber;    
 };
 
+// calculates total cost(player+manager+coach)
 function calculateTotalCost(playerCost, managerCost, coachCost) {
     return playerCost + managerCost + coachCost;
-}
+};
 
+// changes inner text of player cost
 function updateTotalPlayerExpensesField() {
     const totalPlayerExpenses =  calculatePlayerTotalCost();
     
@@ -49,9 +54,10 @@ function updateTotalPlayerExpensesField() {
     else {
         alert(alertMessage);
     }
-}
+};
 
-function updateTotalExpensesFiels() {
+// changes inner text of total cost
+function updateTotalExpensesField() {
     
     const totalPlayerExpenses = calculatePlayerTotalCost();
 
@@ -71,7 +77,7 @@ function updateTotalExpensesFiels() {
         alert(alertMessage);
     }
 
-}
+};
 
 // adds eventlistener to every player button
 for(button of buttons) {
@@ -102,13 +108,14 @@ for(button of buttons) {
     })
 };
 
+// button to calculate player cost
 playerTotalCostButton.addEventListener('click', function() {
     updateTotalPlayerExpensesField();
 });
 
+// button to calculate total cost
 calculateTotalButton.addEventListener('click', function() {
-    updateTotalPlayerExpensesField();
     if(selectedPlayerCounter !== 0) {
-        updateTotalExpensesFiels();
+        updateTotalExpensesField();
     }
 });
